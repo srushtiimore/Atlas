@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Atlas",
+        "folders": 10,
+        "description": "My new Project",
+        "id": 1
+    },
+    {
+        "name": "Atlas",
+        "folders": 10,
+        "description": "My new Project",
+        "id": 2
+    },
+    {
+        "name": "Atlas",
+        "folders": 10,
+        "description": "My new Project",
+        "id": 3
+    },
+    {
+        "name": "Atlas Latest",
+        "folders": 25,
+        "description": "Adavanced version of Atlas",
+        "id": 4
+    }
+]
