@@ -1,26 +1,37 @@
 [
     {
-        "name": "Atlas",
-        "folders": 10,
-        "description": "My new Project",
-        "id": 1
+        "name": "Mood Based Gaming Hub",
+        "folders": 15,
+        "description": "Displays games based on user's mood",
+        "id": 5
     },
     {
-        "name": "Atlas",
-        "folders": 10,
-        "description": "My new Project",
-        "id": 2
+        "name": "A",
+        "folders": 1,
+        "description": "B",
+        "id": 6
     },
     {
-        "name": "Atlas",
-        "folders": 10,
-        "description": "My new Project",
+        "name": "Hospital Bed and Oxygen Availability Tracker",
+        "folders": 20,
+        "description": "finds nearby hospitals based on availability of bed and oxygen",
         "id": 3
     },
     {
-        "name": "Atlas Latest",
-        "folders": 25,
-        "description": "Adavanced version of Atlas",
+        "name": "Atlas",
+        "folders": 20,
+        "description": "Software where all apps works together",
         "id": 4
+    },
+    {
+        "name": "Updated",
+        "folders": 1,
+        "description": "updated code for id",
+        "id": 7
+    },
+    {
+        "name": "abc",
+        "description": "xyz",
+        "id": 8
     }
 ]
