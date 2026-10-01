@@ -6,32 +6,14 @@
         "id": 5
     },
     {
-        "name": "A",
-        "folders": 1,
-        "description": "B",
-        "id": 6
-    },
-    {
-        "name": "Hospital Bed and Oxygen Availability Tracker",
-        "folders": 20,
-        "description": "finds nearby hospitals based on availability of bed and oxygen",
-        "id": 3
-    },
-    {
         "name": "Atlas",
         "folders": 20,
         "description": "Software where all apps works together",
         "id": 4
     },
     {
-        "name": "Updated",
-        "folders": 1,
-        "description": "updated code for id",
-        "id": 7
-    },
-    {
-        "name": "abc",
-        "description": "xyz",
-        "id": 8
+        "name": "Atlas 4",
+        "description": "Day 4 upgraded Atlas with repo and services",
+        "id": 9
     }
 ]

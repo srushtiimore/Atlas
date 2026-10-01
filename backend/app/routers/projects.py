@@ -1,72 +1,58 @@
-
+#Receives requests and returns HTTP responses
 from fastapi import APIRouter , HTTPException ,status    #HTTPEXCEPTION returns http errors- 404 not found 
+
 from app.schemas.project import Project , ProjectUpdate,ProjectResponse
-from app.data.store import load_projects, save_projects
+from app.services import project_services
 
 router = APIRouter()
 
 @router.get("/projects")
 def projects_all():
-    return load_projects()
+    return project_services.get_all_projects()
 
 #creating project schema and routing 
 @router.post("/projects",response_model=ProjectResponse,status_code=status.HTTP_201_CREATED)
 def create_project(project: Project):
-     projects = load_projects()
-
-     new_project = project.model_dump()      #conerts pydantic obj into py dict
-     new_project["id"] = max((item["id"] for item in projects),default=0) + 1  # adds id to project based on max id +1, default- if no id exist
     
-     projects.append(new_project)            #adds it into the list
-     save_projects(projects)                 #saves this to the json
-
-     return new_project
+     new_project = project.model_dump()      #conerts pydantic obj into py dict
+     return project_services.create_project(new_project)  #service call
 
 @router.get("/project/{id}")
 def project_single(id:int):
-    projects = load_projects()
+    project = project_services.get_project_by_id(id)    #service call 
 
-    for project in projects:
-        if project["id"] == id:
-            return project
+    if project is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Project not found"
+        )
 
-    raise HTTPException(
-            status_code=404,
-            detail="Project not found "
-    )
+    return project
 
 
 
 @router.patch("/projects/{id}",response_model=ProjectResponse,status_code=status.HTTP_200_OK)
 def update_project(id:int,updates:ProjectUpdate):  #updates-new info supplied in req body
-    projects=load_projects()
+    update_data=updates.model_dump(exclude_unset=True)  #exclude_unset=true -Include only the fields the client actually sent, rather than every field with its default value.
+    updated_project = project_services.update_project(id, update_data)    #service call
 
-    for project in projects:
-        if project["id"]==id: 
-            update_data=updates.model_dump(exclude_unset=True)  #exclude_unset=true -Include only the fields the client actually sent, rather than every field with its default value.
-            project.update(update_data)
+    if updated_project is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Project not found"
+        )
 
-            save_projects(projects)
-            return project
-
-    raise HTTPException(
-        status_code=404,
-        detail="Project not found"
-     )    
+    return updated_project  
 
 @router.delete("/projects/{id}",status_code=status.HTTP_200_OK)
 def delete_project(id:int):
-    projects=load_projects()
+    deleted_project = project_services.delete_project(id)     #service call
 
-    for project in projects:
-        if project["id"]==id:
-            projects.remove(project)
+    if deleted_project is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Project not found"
+        )
 
-            save_projects(projects)
-            return {"message":"project deleted successfully"}
-    
-    raise HTTPException(
-        status_code=404,
-        detail="Project not found "
-    )      
+    return {"message": "project deleted successfully"}   
 
