@@ -13,9 +13,8 @@ def projects_all():
 #creating project schema and routing 
 @router.post("/projects",response_model=ProjectResponse,status_code=status.HTTP_201_CREATED)
 def create_project(project: Project):
-    
-     new_project = project.model_dump()      #conerts pydantic obj into py dict
-     return project_services.create_project(new_project)  #service call
+    new_project = project.model_dump()      #conerts pydantic obj into py dict
+    return project_services.create_project(new_project)  #service call
 
 @router.get("/project/{id}")
 def project_single(id:int):
@@ -28,8 +27,6 @@ def project_single(id:int):
         )
 
     return project
-
-
 
 @router.patch("/projects/{id}",response_model=ProjectResponse,status_code=status.HTTP_200_OK)
 def update_project(id:int,updates:ProjectUpdate):  #updates-new info supplied in req body
